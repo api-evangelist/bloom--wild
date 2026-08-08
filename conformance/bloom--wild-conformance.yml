@@ -1,0 +1,110 @@
+generated: '2026-08-07'
+method: searched
+source: >-
+  Derived from the two machine-readable documents Bloom & Wild Group actually
+  publishes — https://www.bloomandwild.com/llms.txt and
+  https://www.bloomandwild.com/.well-known/security.txt — plus live probes of the
+  storefront and application-backend hosts on 2026-08-07. Bloom & Wild publishes no
+  API contract, so every API-shaped standard below is recorded as not-applicable
+  rather than failed.
+standards:
+- id: rfc9116-security-txt
+  conforms: partial
+  evidence: >-
+    /.well-known/security.txt returns 200 text/plain on every group storefront and
+    carries Contact, Preferred-Languages, Canonical and Hiring. It omits `Expires`,
+    which RFC 9116 §2.5.5 makes REQUIRED, so the file is well-formed but not
+    conformant. No Policy and no Encryption field.
+  gaps:
+  - Missing REQUIRED `Expires` field
+  - No `Policy` URL
+  - No `Encryption` key
+- id: llms-txt
+  conforms: true
+  evidence: >-
+    https://www.bloomandwild.com/llms.txt (8,762 bytes) follows the llms.txt
+    convention — H1 title, a `>` blockquote summary, then H2 link sections with
+    `- [name](url): description` entries. It is genuinely authored for assistants
+    rather than a docs dump: it instructs routing by DELIVERY DESTINATION rather
+    than browsing country, names the sister-brand storefronts (bloomon, Bergamotte)
+    that must be used instead of bloomandwild.com for NL/BE/DK/FR, tells the
+    assistant to defer to the live site for stock, price and delivery guarantees,
+    and carries an `## Optional` section as the convention specifies. The identical
+    file is served from www.bloomandwild.de.
+- id: llms-txt-widget-spec
+  conforms: true
+  evidence: >-
+    The llms.txt embeds an optional `widgetSpec` JSON block ("gifting-budget-allocator")
+    that an assistant may render as a D3-Sankey budget allocator. This is an
+    unusual and notable agent-facing affordance — the provider is shipping a UI
+    contract to agents inside llms.txt — and it is explicitly framed as an offer,
+    not a required step. Not part of any ratified specification; recorded as an
+    observed vendor extension.
+- id: hsts
+  conforms: true
+  evidence: >-
+    www.bloomandwild.com returns Strict-Transport-Security max-age=2592000 (30
+    days) over TLS 1.3. Short by preload standards (31536000) and no
+    includeSubDomains or preload directive.
+- id: dmarc
+  conforms: true
+  evidence: DMARC published for bloomandwild.com with policy p=quarantine.
+- id: spf
+  conforms: true
+  evidence: SPF record published for bloomandwild.com.
+- id: dnssec
+  conforms: false
+  evidence: No DNSKEY published for bloomandwild.com.
+- id: caa
+  conforms: false
+  evidence: No CAA record published for bloomandwild.com.
+- id: b-corp
+  conforms: true
+  evidence: >-
+    Bloom & Wild Group is a certified B Corporation — asserted by the group in its
+    own llms.txt ("Bloom & Wild is a certified B Corp™") and carried on a dedicated
+    page at https://www.bloomandwild.com/b-corp. This is a social/environmental
+    performance certification, NOT a security or data-protection compliance
+    programme, and it is recorded here as such — no `Compliance` pointer is emitted
+    for it.
+- id: openapi
+  conforms: not-applicable
+  evidence: >-
+    No OpenAPI or Swagger document on any host. Probed /openapi.json,
+    /openapi.yaml, /swagger.json, /v1/openapi.json, /api-docs, /docs, /redoc and
+    /rapidoc against api.bloomandwild.com (all 404 with a JSON error envelope) and
+    www.bloomandwild.com (404 or SPA shell).
+- id: graphql
+  conforms: not-applicable
+  evidence: https://api.bloomandwild.com/graphql returns 404; no GraphQL surface found.
+- id: asyncapi
+  conforms: not-applicable
+  evidence: No public event, streaming or webhook surface is documented.
+- id: mcp
+  conforms: not-applicable
+  evidence: >-
+    No MCP server. /api/mcp 302s to the application backend which answers 404 to a
+    JSON-RPC tools/list; /.well-known/mcp.json and /.well-known/oauth-protected-resource
+    are 404.
+- id: a2a
+  conforms: not-applicable
+  evidence: >-
+    /.well-known/agent-card.json and the legacy /.well-known/agent.json return 404
+    on every group host probed. No agent card is published, so none is recorded.
+- id: oauth2
+  conforms: not-applicable
+  evidence: >-
+    No /.well-known/oauth-authorization-server and no public OAuth surface. Account
+    sign-in is a first-party session on the brand's own clients.
+- id: oidc
+  conforms: not-applicable
+  evidence: No /.well-known/openid-configuration on any host.
+- id: rfc9457-problem-details
+  conforms: not-applicable
+  evidence: >-
+    The private application backend answers a JSON:API-shaped envelope
+    ({"errors":[{"code","title","detail","status"}]}), not application/problem+json,
+    but it is undocumented and not a public contract, so this is not graded.
+- id: rfc8615-well-known-api-catalog
+  conforms: false
+  evidence: /.well-known/api-catalog returns 404 on every group host.

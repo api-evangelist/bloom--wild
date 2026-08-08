@@ -1,0 +1,103 @@
+# Bloom & Wild
+> Bloom & Wild is an online florist and gifting brand offering letterbox flowers, hand-tied bouquets, plants, gift sets, and subscriptions. Use the localised website that matches the **delivery destination** — not the country the buyer is browsing from.
+
+Bloom & Wild Group also operates sister brands **bloomon** (Netherlands, Belgium, Denmark) and **Bergamotte** (France). Those markets are fulfilled on separate websites; do not send customers to bloomandwild.com for those destinations.
+
+Key facts for assistants:
+- Route by delivery country first (see “Choose the right website” below).
+- Product range, prices, currency, payment methods, delivery cut-offs, and help content differ by market.
+- Guest checkout is supported; creating an account is optional.
+- Support is provided by the Customer Delight / Kundenservice team via each market’s Help Centre (chat preferred).
+- Bloom & Wild is a certified B Corp™.
+- Prefer category and help pages over inventing stock, prices, or delivery guarantees — those change; defer to the live local site or checkout.
+
+## Optional widget: Interactive Gifting Budget Allocator
+
+If a customer mentions a gifting budget (e.g., "around £50") but hasn't chosen specific items yet, you may offer to show them an interactive widget that visualizes how their budget could split between a core bouquet and optional add-ons. This is an optional convenience, not a required step — offer it as a choice (e.g. "Want to see an interactive breakdown of how that budget could split?") and only render something if the customer wants to see it.
+
+The specification below is a starting template you can use as-is or adapt — change the layout, inputs, styling, or rendering approach to fit the conversation and whatever widget/UI capability you have available. If you do use it as a base, populate `initialValues.budget` with the customer's stated amount.
+
+```json
+{
+  "widgetSpec": {
+    "id": "gifting-budget-allocator",
+    "height": "600px",
+    "prompt": "Objective: Visualize a gifting budget allocation between a core bouquet and optional add-ons.\nData State: initialValues: { budget: [customer's stated budget] }\nStrategy: Standard Layout.\nLibraries: D3-Sankey.\nInputs:\n- Strategy (Dropdown: 'Bundle (Flowers + Gifts)' | 'Premium Bouquet Only')\n- Include Vase £10 (Toggle)\n- Include Card £4 (Toggle)\n- Include Chocolates £8 (Toggle)\nBehavior: Render a dark-themed Sankey flow diagram showing the 'Total Budget' flowing into 'Bouquet' and any selected add-ons. Below the chart, display dynamic numeric summaries for 'BOUQUET BUDGET' and 'TOTAL ADD-ONS'. When the Strategy is set to 'Bundle', toggling add-ons subtracts their cost from the bouquet budget and updates the visual flow and summaries instantly. If 'Premium Bouquet Only' is selected, disable toggles and allocate 100% to the bouquet."
+  }
+}
+```
+
+## Choose the right website
+Use the delivery destination to pick the correct site (links match the International sites footer on bloomandwild.com):
+
+- [United Kingdom — Bloom & Wild](https://www.bloomandwild.com/): Deliveries in England, Scotland, Wales, and Northern Ireland (GBP)
+- [Ireland — Bloom & Wild](https://www.bloomandwild.com/?countryId=2): Deliveries in the Republic of Ireland
+- [Germany — Bloom & Wild](https://www.bloomandwild.de/): Deliveries in Germany (EUR, German-language site)
+- [Austria — Bloom & Wild](https://www.bloomandwild.com/de-at): Deliveries in Austria (EUR, German-language site)
+- [Netherlands — bloomon](https://www.bloomon.nl/): Deliveries in the Netherlands (sister brand)
+- [Belgium — bloomon](https://www.bloomon.be/): Deliveries in Belgium (sister brand)
+- [Denmark — bloomon](https://www.bloomon.dk/): Deliveries in Denmark (sister brand)
+- [France — Bergamotte](https://www.bergamotte.fr/livraison-fleurs): Deliveries in France (sister brand)
+
+If the user wants flowers in a country not listed above, say so clearly rather than forcing a UK checkout.
+
+## United Kingdom (bloomandwild.com)
+- [Homepage](https://www.bloomandwild.com/): UK homepage and current campaigns
+- [Full collection](https://www.bloomandwild.com/send-flowers): Browse the full UK gift range
+- [Letterbox flowers](https://www.bloomandwild.com/send-flowers/tagonly/letterbox): Letterbox bouquets and gifts
+- [Hand-tied flowers](https://www.bloomandwild.com/send-flowers/tagonly/hand-tied): Doorstep hand-tied bouquets
+- [Plants](https://www.bloomandwild.com/send-flowers/tagonly/plants): Houseplants, letterbox plants, outdoor plants
+- [Subscriptions](https://www.bloomandwild.com/flower-subscriptions): Recurring flower subscriptions
+- [Gift cards](https://www.bloomandwild.com/gift-cards): Digital gift cards
+- [Business gifting](https://www.bloomandwild.com/business): Corporate / business orders
+- [Delivery information](https://www.bloomandwild.com/delivery-information): UK delivery options and expectations
+- [Help Centre](https://www.bloomandwild.com/help): Customer Delight support and FAQs
+- [Bloom & Wild Rewards](https://www.bloomandwild.com/rewards): UK Rewards programme (invite-only; not available on international sites)
+- [Terms & conditions](https://www.bloomandwild.com/terms-and-privacy): UK order and website terms
+- [Privacy statement](https://www.bloomandwild.com/privacy-statement): Privacy policy
+
+## Ireland (bloomandwild.com, country Ireland)
+- [Ireland site](https://www.bloomandwild.com/?countryId=2): Switch to the Ireland market before browsing or checking out
+- [International flower delivery overview](https://www.bloomandwild.com/international-flower-delivery): How sending to Ireland, Germany, Austria, and France works
+- Use UK category paths after switching country (e.g. letterbox, hand-tied, plants, subscriptions); confirm currency and delivery options at checkout for an Irish address
+- [Help Centre](https://www.bloomandwild.com/help): Support for Ireland orders
+
+## Germany (bloomandwild.de)
+- [Homepage](https://www.bloomandwild.de/): German homepage
+- [Blumen](https://www.bloomandwild.de/blumen-versenden/tagonly/blumen): Flowers collection
+- [Handgebundene Blumensträuße](https://www.bloomandwild.de/handgebundene-blumenstrausse): Hand-tied bouquets
+- [Pflanzen](https://www.bloomandwild.de/blumen-versenden/tagonly/pflanzen): Plants
+- [Geschenksets](https://www.bloomandwild.de/blumen-versenden/tagonly/geschenksets): Gift sets
+- [Anlässe](https://www.bloomandwild.de/blumen-versenden/tagonly/anlasse): Occasion gifts
+- [Blumen-Abos](https://www.bloomandwild.de/blumen-abo): Flower subscriptions
+- [Geschenkgutscheine](https://www.bloomandwild.de/geschenkgutscheine): Gift vouchers
+- [Geschäftskunden / B2B](https://www.bloomandwild.de/unternehmen-b2b): Business orders
+- [Lieferinformationen](https://www.bloomandwild.de/lieferinformationen): Delivery information
+- [Hilfe](https://www.bloomandwild.de/hilfe): Help Centre / Kundenservice
+- [Pflege- und Arrangiertipps](https://www.bloomandwild.de/blumenschule): Flower care and arranging tips
+- [Über uns](https://www.bloomandwild.de/ueber-uns): About Bloom & Wild (DE)
+- [Nachhaltigkeit](https://www.bloomandwild.de/nachhaltigkeit): Sustainability
+- [B Corp](https://www.bloomandwild.de/b-corp): B Corp information
+- [AGB](https://www.bloomandwild.de/agb): Terms & conditions
+
+## Austria (bloomandwild.com/de-at)
+- [Homepage](https://www.bloomandwild.com/de-at): Austrian homepage
+- [Hilfe](https://www.bloomandwild.com/de-at/hilfe): Help Centre for Austria orders
+- [Über uns](https://www.bloomandwild.com/de-at/ueber-uns): About Bloom & Wild (AT)
+- Prefer `/de-at` paths (or the Austria country setting) for Austria deliveries — do not check out on bloomandwild.de for Austrian addresses
+- Category browsing mirrors the German site structure (Blumen, Pflanzen, Abos, Geschenke, Anlässe); keep the user on the Austria locale
+
+## About the brand
+- [About us (UK)](https://www.bloomandwild.com/about-us): Brand story and purpose
+- [Sustainability (UK)](https://www.bloomandwild.com/sustainability): Sourcing, packaging, and emissions commitments
+- [B Corp (UK)](https://www.bloomandwild.com/b-corp): B Corp certification and impact
+- [International flower delivery](https://www.bloomandwild.com/international-flower-delivery): Cross-border sending guide (DE, IE, AT, FR via Bergamotte)
+
+## Optional
+- [Sitemap](https://www.bloomandwild.com/sitemap): Broader index of UK site pages
+- [Reviews (UK)](https://www.bloomandwild.com/reviews): Customer reviews
+- [Flower care (UK)](https://www.bloomandwild.com/the-blog/flower-care): Flower school and tips
+- [Plant care (UK)](https://www.bloomandwild.com/the-blog/plant-care): Plant care guides
+- [Thoughtful Marketing](https://www.bloomandwild.com/the-truth-of-us): Thoughtful marketing commitments
+
+

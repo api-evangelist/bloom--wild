@@ -1,0 +1,136 @@
+generated: '2026-08-07'
+method: searched
+source: https://www.bloomandwild.com/.well-known/security.txt
+description: >-
+  Results of probing the /.well-known/ discovery surface for every Bloom & Wild
+  Group host reachable from apis.yml and from the group's own llms.txt — the UK
+  storefront (www.bloomandwild.com), the German storefront
+  (www.bloomandwild.de), the three bloomon sister-brand storefronts (.nl/.be/.dk),
+  and the two API hosts observed in the storefront's Content-Security-Policy
+  (api.bloomandwild.com, capi.bloomandwild.com). Status is the HTTP code observed
+  at fetch time on 2026-08-07. Only security.txt returned a real document; it is
+  saved verbatim. No agent card, no OpenID/OAuth discovery document and no API
+  catalog is published on any host. Bergamotte (www.bergamotte.fr) answers 403 to
+  an automated client and is recorded separately as unprobed rather than absent.
+hosts:
+  - host: https://www.bloomandwild.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/plain; charset=UTF-8
+        file: bloom--wild-security.txt
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.bloomandwild.de
+    note: >-
+      Serves the identical security.txt (canonicalised back to
+      www.bloomandwild.com); not saved a second time.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/plain; charset=UTF-8
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.bloomon.nl
+    note: Sister brand; same group security.txt.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/plain; charset=UTF-8
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+  - host: https://www.bloomon.be
+    note: Sister brand; same group security.txt.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/plain; charset=UTF-8
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.bloomon.dk
+    note: Sister brand; same group security.txt.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/plain; charset=UTF-8
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://api.bloomandwild.com
+    note: >-
+      Live JSON application backend behind Kong 3.9.1 + Cloudflare, used by the
+      Bloom & Wild web and mobile clients. It answers a JSON:API-shaped error
+      envelope on every path we probed and publishes no discovery document.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://capi.bloomandwild.com
+    note: >-
+      Second API host declared in the storefront Content-Security-Policy
+      connect-src. Returns text/html 404 on every /.well-known/ path.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+unprobed:
+  - host: https://www.bergamotte.fr
+    reason: >-
+      Sister brand (France). The edge answers 403 to a non-browser client, so
+      absence of a document here is not established.
+    evidence:
+      url: https://www.bergamotte.fr/.well-known/security.txt
+      status: 403
+agent_card: none
+notes:
+  - >-
+    The security.txt is RFC 9116 shaped but INCOMPLETE — it carries Contact,
+    Preferred-Languages, Canonical and Hiring but omits `Expires`, which RFC 9116
+    §2.5.5 makes a REQUIRED field, and omits the optional but useful `Policy` and
+    `Encryption`. Graded in conformance/bloom--wild-conformance.yml.
+  - >-
+    Both storefront hosts serve a single 68,718-byte Angular SPA shell for every
+    path, including deliberately invalid ones, so a raw HTTP 200 from the
+    storefront is not evidence a page exists. Every page assertion in this repo
+    was verified with a JavaScript-rendering fetch against a nonsense-path control.
