@@ -18,6 +18,17 @@ description: 'Bloom & Wild is a British direct-to-consumer online florist and gi
   but real: an llms.txt on the UK and German storefronts that routes assistants to
   the correct market by delivery destination and even ships an optional agent widget
   specification, and an RFC 9116 security.txt served across every group storefront.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.bloomandwild.com/assets/branded-icons/favicons/favicon-192x192.png
 url: https://raw.githubusercontent.com/api-evangelist/bloom--wild/refs/heads/main/apis.yml
 x-type: company
